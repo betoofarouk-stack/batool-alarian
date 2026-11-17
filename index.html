@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>لعبة علاقات الزوايا ثلاثية الأبعاد | الصف الأول الإعدادي | المس بتول</title>
+<meta name="description" content="كتاب بوب-أب ثلاثي الأبعاد تفاعلي لتعلّم علاقات الزوايا والمستقيمات المتوازية والقاطع (Corresponding, Alternating, Complementary, Supplementary) مع نطق المصطلحات الإنجليزية وأسئلة تفاعلية. إعداد المس بتول.">
+<meta name="keywords" content="علاقات الزوايا, رياضيات أولى إعدادي, Angles Relationships, زوايا متناظرة, زوايا متبادلة, متتامة ومتكاملة, لعبة تفاعلية, المس بتول">
+<meta name="author" content="المس بتول">
+<link rel="canonical" href="https://YOUR-USERNAME.github.io/YOUR-REPO/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="لعبة علاقات الزوايا ثلاثية الأبعاد | الصف الأول الإعدادي | المس بتول">
+<meta property="og:description" content="كتاب بوب-أب ثلاثي الأبعاد تفاعلي لتعلّم علاقات الزوايا والمستقيمات المتوازية والقاطع (Corresponding, Alternating, Complementary, Supplementary) مع نطق المصطلحات الإنجليزية وأسئلة تفاعلية. إعداد المس بتول.">
+<meta property="og:url" content="https://YOUR-USERNAME.github.io/YOUR-REPO/">
+<meta property="og:image" content="https://YOUR-USERNAME.github.io/YOUR-REPO/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="مستقيمان متوازيان وقاطع مع زاويتين ملوّنتين - علاقات الزوايا">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="لعبة علاقات الزوايا ثلاثية الأبعاد | الصف الأول الإعدادي | المس بتول">
+<meta name="twitter:description" content="كتاب بوب-أب ثلاثي الأبعاد تفاعلي لتعلّم علاقات الزوايا والمستقيمات المتوازية والقاطع (Corresponding, Alternating, Complementary, Supplementary) مع نطق المصطلحات الإنجليزية وأسئلة تفاعلية. إعداد المس بتول.">
+<meta name="twitter:image" content="https://YOUR-USERNAME.github.io/YOUR-REPO/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<style>
+:root{--bg:#f4efe6;--ink:#1c2321;--card:#fff;--red:#d63b3b;--blue:#2466c4;--ok:#1f8a4c;--soft:#ece4d6;--line:#d4c5b9;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1814;--ink:#f1ebe2;--card:#2a231d;--red:#ff7a7a;--blue:#7db2ff;--ok:#4fd08a;--soft:#38302a;--line:#54483d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d1814;--ink:#f1ebe2;--card:#2a231d;--red:#ff7a7a;--blue:#7db2ff;--ok:#4fd08a;--soft:#38302a;--line:#54483d;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Cairo',Tahoma,sans-serif;line-height:1.7}
+#stage{position:relative;height:42vh;min-height:240px;background:#2b2520;overflow:hidden}
+#stage canvas{display:block;width:100%;height:100%;touch-action:none}
+#hint{position:absolute;bottom:6px;left:0;right:0;text-align:center;color:#fff;opacity:.75;font-size:.8rem;pointer-events:none}
+#nogl{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:#fff;padding:20px;text-align:center}
+main{max-width:640px;margin:0 auto;padding:12px 14px 40px}
+.meta{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.dots{display:flex;gap:6px}
+.dots i{width:12px;height:12px;border-radius:50%;background:var(--soft);border:2px solid var(--line)}
+.dots i.on{border-color:var(--red)}
+.dots i.done{background:var(--ok);border-color:var(--ok)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px;margin-top:10px}
+h2{margin:0;font-size:1.3rem;font-weight:900;color:var(--red)}
+.en{direction:ltr;unicode-bidi:isolate}
+.pr{font-size:.9rem;font-weight:400;color:var(--ink)}
+.spk{border:2px solid var(--line);background:var(--card);border-radius:8px;padding:0 8px;margin:0 4px;font-size:1rem;cursor:pointer}
+.ex{direction:ltr;text-align:left;background:var(--soft);border-radius:8px;padding:6px 10px;margin-top:8px;font-weight:700}
+.q{font-weight:700;margin-bottom:8px}
+.opts{display:grid;gap:8px}
+.opts button,.btn{padding:10px 14px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;font:700 1.05rem 'Cairo',Tahoma,sans-serif;cursor:pointer}
+.opts button{direction:ltr;text-align:left}
+.opts button.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 20%,var(--card))}
+.opts button.bad{border-color:var(--red);background:color-mix(in srgb,var(--red) 18%,var(--card))}
+button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.flap{width:100%;margin-top:10px;border-style:dashed;background:var(--soft)}
+.flap:disabled{opacity:.5;cursor:not-allowed}
+.flap.open{border-style:solid;border-color:var(--ok)}
+#why{margin-top:8px;font-weight:700;color:var(--ok)}
+.stamp{width:78px;height:78px;border:3px dashed var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:.8rem;color:var(--red);opacity:.35;transform:rotate(-10deg);transition:.4s;margin-inline-start:auto}
+.stamp.on{opacity:1;border-style:solid;transform:rotate(0) scale(1.05)}
+.nav{display:flex;gap:10px;margin-top:12px;align-items:center}
+.nav .btn{flex:1}
+.btn.pri{background:var(--red);border-color:var(--red);color:#fff}
+.end{text-align:center}
+.big{font-size:2.6rem;font-weight:900;color:var(--red)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div id="stage"><div id="hint">اسحبي بإصبعك لتدوير الكتاب</div><div id="nogl">تعذّر عرض المجسّم، لكن الدرس والأسئلة تعمل أدناه.</div></div>
+<main>
+<div id="lesson">
+<div class="meta"><div class="dots" id="dots"></div><span id="sc"></span></div>
+<div class="card">
+<div style="display:flex;align-items:center"><div><h2 id="ttl"></h2><div id="ar"></div></div><div class="stamp" id="stamp">ختم الإنجاز</div></div>
+<div class="ex" id="rule"></div>
+</div>
+<div class="card">
+<div class="q" id="qt"></div>
+<div class="opts" id="op"></div>
+<button class="btn flap" id="fl" disabled>أجيبي أولاً لفتح الغطاء</button>
+<div id="why" hidden></div>
+</div>
+<div class="nav"><button class="btn" id="pv">السابق</button><button class="btn pri" id="nx">التالي</button></div>
+</div>
+<div id="end" class="card end" hidden><div class="big" id="fs"></div><p id="fm"></p><button class="btn pri" id="rs">ابدئي من جديد</button></div>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)},D=Math.PI/180;
+function sh(a){a=a.slice();for(var k=a.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[j];a[j]=t}return a}
+function say(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.8;speechSynthesis.speak(u)}
+var SPR=[
+{t:"comp",en:"Complementary",tr:"كومبلمنتري",ar:"متتامتان، C = Corner (ركن)",rule:"Complementary: sum = 90°",say:"Complementary angles"},
+{t:"supp",en:"Supplementary",tr:"سابلمنتري",ar:"متكاملتان، S = Straight (خط مستقيم)",rule:"Supplementary: sum = 180°",say:"Supplementary angles"},
+{t:"refl",en:"Reflex",tr:"ريفلكس",ar:"الزاوية المنعكسة (أكبر من 180°)",rule:"Angle + Reflex = 360°",say:"Reflex angle"},
+{t:"par",en:"Corresponding (F)",tr:"كوريسبوندينغ",ar:"متناظرتان، شكل حرف F",rule:"m // n: equal",pair:[3,7],eq:1,say:"Corresponding angles"},
+{t:"par",en:"Alternating Interior (Z)",tr:"أولترنيتينغ إنتيريور",ar:"تبادل داخلي، شكل حرف Z",rule:"m // n: equal",pair:[3,5],eq:1,say:"Alternating interior angles"},
+{t:"par",en:"Alternating Exterior",tr:"أولترنيتينغ إكستيريور",ar:"تبادل خارجي، Z للخارج",rule:"m // n: equal",pair:[2,8],eq:1,say:"Alternating exterior angles"},
+{t:"par",en:"Interior same side (C)",tr:"إنتيريور سيم سايد",ar:"داخليتان على جهة واحدة، شكل حرف C",rule:"m // n: sum = 180°",pair:[4,5],eq:0,say:"Interior angles on the same side"}];
+function mk(k){
+var s=SPR[k],v,ans,q,e,pool;
+if(s.t==="comp"){v=sh([25,35,40,55,65])[0];ans=90-v;q="زاويتان متتامتان (Complementary)، إحداهما "+v+"°. فكم الأخرى؟";e="C = Corner، المجموع 90°، إذن "+ "90° − "+v+"° = "+ans+"°."}
+else if(s.t==="supp"){v=sh([60,110,120,135])[0];ans=180-v;q="زاويتان متكاملتان (Supplementary)، إحداهما "+v+"°. فكم الأخرى؟";e="S = Straight، المجموع 180°، إذن 180° − "+v+"° = "+ans+"°."}
+else if(s.t==="refl"){v=sh([50,80,100,130])[0];ans=360-v;q="زاوية قياسها "+v+"°. فكم قياس الزاوية المنعكسة (Reflex) لها؟";e="Angle + Reflex = 360°، إذن 360° − "+v+"° = "+ans+"°."}
+else{v=sh([50,60,70,110,120,130])[0];var a=s.pair[0],b=s.pair[1];ans=s.eq?v:180-v;q="m // n و ∠"+a+" = "+v+"°. أوجدي ∠"+b+":";
+e=s.eq?"بما أن m // n فإن ∠"+a+" = ∠"+b+" (الزاويتان "+s.en+" متساويتان)، إذن ∠"+b+" = "+v+"°.":"بما أن m // n فإن مجموع ∠"+a+" و ∠"+b+" = 180°، إذن ∠"+b+" = 180° − "+v+"° = "+ans+"°."}
+pool=[v,180-v,90,360-v,90-v,180].filter(function(x,i,r){return x>0&&x<=360&&x!==ans&&r.indexOf(x)===i});
+var o=sh([ans].concat(sh(pool).slice(0,2)));
+return{v:v,ans:ans,q:q,e:e,o:o.map(function(x){return x+"°"}),a:o.indexOf(ans)}}
+var ST,cur=0;
+function init(){ST=SPR.map(function(s,k){return{q:mk(k),pk:null}});cur=0;$("end").hidden=true;$("lesson").hidden=false;render()}
+
+/* ---------- 3D ---------- */
+var RED=0xd63b3b,BLUE=0x2466c4,DARK=0x1c2321,GREY=0xdde5ee,scene,camera,renderer,pop,pt=1,ok3d=false;
+try{
+var stage=$("stage");
+scene=new THREE.Scene();scene.background=new THREE.Color(0x2b2520);
+camera=new THREE.PerspectiveCamera(40,1,.1,100);camera.position.set(0,8.6,6.2);
+renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));stage.insertBefore(renderer.domElement,stage.firstChild);
+var ctl=new THREE.OrbitControls(camera,renderer.domElement);ctl.enableDamping=true;ctl.enablePan=false;ctl.maxPolarAngle=Math.PI/2-.08;ctl.minDistance=6;ctl.maxDistance=16;
+scene.add(new THREE.AmbientLight(0xfff5e6,.75));var dl=new THREE.DirectionalLight(0xfffaed,1);dl.position.set(5,12,8);scene.add(dl);
+var cov=new THREE.Mesh(new THREE.BoxGeometry(5.8,.3,7.4),new THREE.MeshStandardMaterial({color:0x8b3a2b,roughness:.5}));cov.position.y=-.15;scene.add(cov);
+var pg=new THREE.Mesh(new THREE.BoxGeometry(5.4,.08,7),new THREE.MeshStandardMaterial({color:0xfcf9f2,roughness:.8}));pg.position.y=.04;scene.add(pg);
+pop=new THREE.Group();scene.add(pop);ok3d=true;
+function fit(){var w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix()}
+fit();if(window.ResizeObserver)new ResizeObserver(fit).observe(stage);else addEventListener("resize",fit);
+(function loop(){requestAnimationFrame(loop);if(pt<1){pt=Math.min(1,pt+.045);var e=1-Math.pow(1-pt,3);pop.scale.setScalar(Math.max(.01,e))}ctl.update();renderer.render(scene,camera)})();
+}catch(err){ok3d=false;$("nogl").style.display="flex";$("hint").hidden=true}
+function wall(cx,cy,len,ang,col){var g=new THREE.BoxGeometry(len,.45,.07);g.translate(0,.225,0);var m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:col,roughness:.5}));m.position.set(cx,.08,-cy);m.rotation.y=ang*D;pop.add(m)}
+function ray(px,py,ang,L,col){wall(px+L/2*Math.cos(ang*D),py+L/2*Math.sin(ang*D),L,ang,col)}
+function label(x,y,t){var c=document.createElement("canvas");c.width=c.height=128;var g=c.getContext("2d");g.fillStyle="#fff";g.beginPath();g.arc(64,64,58,0,7);g.fill();g.fillStyle="#16263a";g.font="bold "+(String(t).length>2?42:70)+"px sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(t,64,68);var s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c)}));var z=String(t).length>2?.85:.58;s.scale.set(z,z,1);s.position.set(x,.65,-y);pop.add(s)}
+function wedge(px,py,s,l,r,col,txt){var m=new THREE.Mesh(new THREE.CircleGeometry(r,48,s*D,l*D),new THREE.MeshStandardMaterial({color:col,side:THREE.DoubleSide,roughness:.7}));m.rotation.x=-Math.PI/2;m.position.set(px,.1,-py);pop.add(m);var a=(s+l/2)*D,rr=r*.66;label(px+rr*Math.cos(a),py+rr*Math.sin(a),txt)}
+function model(k,reveal,still){
+if(!ok3d)return;
+while(pop.children.length)pop.remove(pop.children[0]);
+var s=SPR[k],q=ST[k].q,v=q.v,o=reveal?q.ans+"°":"?";
+if(s.t==="comp"){var x=-1.3,y=-1.4;[0,v,90].forEach(function(a){ray(x,y,a,3.2,DARK)});wedge(x,y,0,v,1.9,RED,v+"°");wedge(x,y,v,90-v,1.9,BLUE,o)}
+else if(s.t==="supp"){ray(0,-1.6,0,2.4,DARK);ray(0,-1.6,180,2.4,DARK);ray(0,-1.6,v,2.8,DARK);wedge(0,-1.6,0,v,1.5,RED,v+"°");wedge(0,-1.6,v,180-v,1.5,BLUE,o)}
+else if(s.t==="refl"){ray(-.4,-.2,0,2.4,DARK);ray(-.4,-.2,v,2.4,DARK);wedge(-.4,-.2,0,v,1.7,RED,v+"°");wedge(-.4,-.2,v,360-v,1.7,BLUE,o)}
+else{
+wall(0,1.3,5,0,DARK);wall(0,-1.3,5,0,DARK);wall(0,0,6.4,296.6,BLUE);
+var P=[[-.65,1.3],[.65,-1.3]],R=[[0,116.6],[116.6,63.4],[180,116.6],[296.6,63.4]];
+for(var n=1;n<=8;n++){var pt2=P[n>4?1:0],rg=R[[0,1,2,3][(n-1)%4]===undefined?0:((n-1)%4)];
+/* numbering: 1 ur,2 ul,3 ll,4 lr */
+var idx=[0,1,2,3][(n-1)%4],map=[0,1,2,3];
+var reg=[R[0],R[1],R[2],R[3]][idx];
+var hl=s.pair.indexOf(n)>-1;
+wedge(pt2[0],pt2[1],reg[0],reg[1],1.05,hl?RED:GREY,String(n))}
+}
+if(!still){pt=0;pop.scale.setScalar(.01)}else{pt=1;pop.scale.setScalar(1)}
+}
+
+/* ---------- UI ---------- */
+function score(){return ST.filter(function(s){return s.pk!==null&&s.pk===s.q.a}).length}
+function render(){
+var s=SPR[cur],st=ST[cur],q=st.q,ans=st.pk!==null;
+$("dots").innerHTML="";ST.forEach(function(x,k){var d=document.createElement("i");d.className=(k===cur?"on ":"")+(x.pk!==null&&x.pk===x.q.a?"done":"");$("dots").appendChild(d)});
+$("sc").textContent="النقاط: "+score();
+$("ttl").innerHTML='<span class="en">'+s.en+'</span>';
+if(window.speechSynthesis){var b=document.createElement("button");b.className="spk";b.type="button";b.textContent="🔊";b.setAttribute("aria-label","استمعي");b.onclick=function(){say(s.say)};$("ttl").appendChild(b)}
+$("ar").innerHTML=s.ar+' <span class="pr">('+s.tr+')</span>';
+$("rule").textContent=s.rule;
+$("stamp").className="stamp"+(ans&&st.pk===q.a?" on":"");
+$("qt").textContent=q.q;
+var o=$("op");o.innerHTML="";
+q.o.forEach(function(t,k){var b=document.createElement("button");b.textContent=t;
+if(ans){if(k===q.a)b.className="ok";else if(k===st.pk)b.className="bad"}
+b.onclick=function(){pick(k)};o.appendChild(b)});
+$("fl").disabled=!ans;$("fl").className="btn flap";$("fl").textContent=ans?"افتحي الغطاء لمعرفة السبب":"أجيبي أولاً لفتح الغطاء";
+$("why").hidden=true;$("why").textContent=q.e;
+$("pv").disabled=cur===0;$("pv").style.opacity=cur===0?.5:1;
+$("nx").textContent=cur===SPR.length-1?"النتيجة":"التالي";
+model(cur,ans,false)}
+function pick(k){var st=ST[cur];if(st.pk!==null)return;st.pk=k;
+var ok=k===st.q.a;render();model(cur,true,true);
+$("fb")&&0}
+$("fl").onclick=function(){var w=$("why");w.hidden=!w.hidden;$("fl").classList.toggle("open",!w.hidden)};
+$("pv").onclick=function(){if(cur>0){cur--;render()}};
+$("nx").onclick=function(){if(cur<SPR.length-1){cur++;render()}else{
+$("lesson").hidden=true;$("end").hidden=false;var sc=score();$("fs").textContent=sc+" / "+SPR.length;
+$("fm").textContent=sc>=6?"ممتاز! أنتِ تعرفين علاقات الزوايا.":sc>=4?"جيد جداً! راجعي الدروس وحاولي مجدداً.":"لا بأس، قلّبي الصفحات من جديد وتعلّمي.";
+scrollTo(0,0)}};
+$("rs").onclick=init;
+init();
+</script>
+</body>
+</html>
